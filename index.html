@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exporters Without Borders / Exportateurs Sans Frontières</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+<link rel="icon" type="image/svg+xml" href="favicon_io/esf-favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand:     #F7F1E3;
+    --sand-dk:  #EAE0CB;
+    --ink:      #2B2B2B;
+    --ink-soft: #5A5247;
+    --oxblood:  #981b1e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /*
+   * Layout strategy: on viewports tall enough to hold the content, lock to
+   * the screen (no scroll). On shorter viewports, fall back to natural flow.
+   * We use 100dvh (dynamic viewport height) so mobile browser chrome is
+   * accounted for. The @media overflow fallback kicks in when the viewport
+   * is too short to show everything comfortably.
+   */
+  html {
+    height: 100%;
+  }
+  body {
+    background: var(--sand);
+    color: var(--ink);
+    font-family: 'EB Garamond', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    height: 100dvh;        /* fill the visible viewport exactly */
+    /* overflow: hidden; */
+
+  }
+
+  .page-wrapper {
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* When the viewport is too short to hold the content, let it scroll */
+  @media (max-height: 540px) {
+    .page-wrapper {
+      height: auto;
+      min-height: 100dvh;
+      overflow: visible;
+    }
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* Fluid horizontal padding: 28px on mobile → 40px on wide screens */
+  .wrap {
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  /* ——— Header ——— */
+  header.top { border-bottom: 1px solid rgba(43,43,43,0.16); }
+  header.top .wrap {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    /* Fluid vertical padding: tighter on small screens */
+    padding-top: clamp(0.875rem, 2.2vh, 1.375rem);
+    padding-bottom: clamp(0.875rem, 2.2vh, 1.375rem);
+    gap: 1.5rem;
+  }
+
+  .wordmark { line-height: 1.4; }
+  .wordmark .en {
+    display: block;
+    font-family: 'Cormorant Garamond', Garamond, serif;
+    /* Fluid: ~13px on small → 16px on large */
+    font-size: clamp(0.8125rem, 1.5vw, 1rem);
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+  }
+  .wordmark .fr {
+    display: block;
+    font-size: clamp(0.7rem, 1.2vw, 0.78125rem);
+    font-style: italic;
+    letter-spacing: 0.16em;
+    color: var(--ink-soft);
+  }
+  .tag {
+    font-family: 'Cormorant Garamond', Garamond, serif;
+    font-size: clamp(0.625rem, 1vw, 0.6875rem);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  /* ——— Hero ——— */
+  section.hero {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    /* Fluid vertical padding */
+    padding: clamp(1.25rem, 3vh, 2.5rem) 0;
+    /* Prevent hero from growing too large on very tall screens */
+    min-height: 0;
+  }
+
+  h1.headline {
+    font-family: 'Cormorant Garamond', Garamond, serif;
+    font-weight: 600;
+    /* Fluid: ~28px on mobile → 40px on desktop */
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: var(--oxblood);
+    max-width: 680px;
+  }
+
+  p.blurb {
+    /* Fluid: ~16px on mobile → 18px on desktop */
+    font-size: clamp(1rem, 1.8vw, 1.125rem);
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 600px;
+    margin-top: clamp(0.875rem, 2vh, 1.5rem);
+  }
+  p.blurb a {
+    border-bottom: 1px solid #98000060;
+    padding-bottom: 2px;
+    color: var(--oxblood);
+  }
+  p.blurb a:hover { border-bottom-color: var(--oxblood); }
+
+  /* ——— People panel ——— */
+  section.people {
+    background: var(--sand-dk);
+    padding: clamp(1.25rem, 3vh, 2.5rem) 0 clamp(0.875rem, 2vh, 1.5rem);
+  }
+
+  .people-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .col .label {
+    font-family: 'Cormorant Garamond', Garamond, serif;
+    font-size: clamp(0.75rem, 1.1vw, 0.8125rem);
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+    padding-bottom: 0.6875rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(152,0,0,0.30);
+  }
+
+  .person { margin-bottom: 1rem; }
+  .person:last-child { margin-bottom: 0; }
+
+  .person .name {
+    display: block;
+    /* Fluid: ~17px → 19px */
+    font-size: clamp(1.0625rem, 1.6vw, 1.1875rem);
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.1875rem;
+  }
+  .person .aff {
+    display: block;
+    font-size: clamp(0.9375rem, 1.4vw, 0.96875rem);
+    font-style: italic;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+  .person a.email {
+    display: inline-block;
+    font-size: clamp(0.9375rem, 1.4vw, 0.96875rem);
+    color: var(--oxblood);
+    border-bottom: 1px solid rgba(152,0,0,0.40);
+    padding-bottom: 1px;
+  }
+  .person a.email:hover { border-bottom-color: var(--oxblood); }
+
+  footer {
+    margin-top: clamp(1rem, 2.5vh, 1.75rem);
+    padding-top: 1rem;
+    border-top: 1px solid rgba(43,43,43,0.16);
+    font-family: 'Cormorant Garamond', Garamond, serif;
+    font-size: clamp(0.625rem, 1vw, 0.6875rem);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* ——— Narrow screens: collapse to single column, allow scrolling ——— */
+  @media (max-width: 560px) {
+    .page-wrapper { height: auto; min-height: 100dvh; overflow: visible; }
+    .tag { display: none; }
+    .people-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+<div id="page" class="page-wrapper">
+<!-- ============================================================
+  SITE DATA — edit everything here; the script below renders it.
+  You should not need to touch anything below the closing </script> tag
+  for routine content updates.
+============================================================ -->
+<script>
+const SITE = {
+
+  /* ---- Header ---- */
+  nameEN: "Exporters Without Borders",
+  nameFR: "Exportateurs Sans Frontières",
+  status: "Pre-launch · 2026",
+
+  /* ---- Hero ---- */
+  headline: "Four people built Colombia's $2B flower industry. We're looking for the next group of industrial pioneers.",
+
+  /* Each blurb is an array of segments. A segment is either:
+       { text: "plain text" }
+     or
+       { text: "link label", href: "url" }
+     Segments in the same blurb are joined into one paragraph. */
+  blurbs: [
+    [
+      { text: "Export industries are the surest path to economic growth for low-income countries. But these industries don't emerge by accident, and they need someone to go first. Exporters Without Borders finds promising gaps – sectors where a small, talented team can build something big – and backs founders to close them. Read more about us " },
+      { text: "here", href: "https://docs.google.com/document/d/160m6xwqFj38ygCboR1ob6kF6vm3yUz5YFpoZ-W6pAlo/edit?usp=sharing" },
+      { text: "." }
+    ],
+    [
+      { text: "We're starting with Madagascar's freeze-dried fruit industry – " },
+      { text: "apply to become an industrialist here", href: "https://docs.google.com/document/d/16VjBSBItk7kfQ5kvFFW8rr2RZH5nv95aFR3wJ7CDpDY/edit?usp=sharing" },
+      { text: ". We've already scoped the opportunity, secured you initial funding and local partnerships, are compiling an investor consortium to help you scale, and we will work for you to get it set up." }
+    ]
+  ],
+
+  /* ---- People ---- */
+  /* Each column has a label and a list of people.
+     A person has a name, and either an email or an affiliation (aff), not both. */
+  people: [
+    {
+      label: "Founders",
+      members: [
+        { name: "Saarthak Gupta",  email: "saarthak@exporterswithoutborders.com" },
+        { name: "Niklas Piringer", email: "niklas@exporterswithoutborders.com"   }
+      ]
+    },
+    {
+      label: "Advisors",
+      members: [
+        { name: "Ricardo Hausmann",   aff: "Harvard Growth Lab / Former Minister of Planning, Venezuela" },
+        { name: "Kartik Akileswaran", aff: "Growth Teams" }
+      ]
+    }
+  ]
+
+};
+</script>
+
+<!-- ============================================================
+  Render — no need to edit below this line for content changes.
+============================================================ -->
+<script>
+(function () {
+
+  const page = document.getElementById("page");
+
+  /* ---- Header ---- */
+  document.title = SITE.nameEN + " / " + SITE.nameFR;
+
+  page.insertAdjacentHTML("afterbegin", `
+    <header class="top">
+      <div class="wrap">
+        <div class="wordmark">
+          <span class="en">${SITE.nameEN}</span>
+          <span class="fr">${SITE.nameFR}</span>
+        </div>
+        <div class="tag">${SITE.status}</div>
+      </div>
+    </header>
+  `);
+
+  /* ---- Hero ---- */
+  const blurbHTML = SITE.blurbs.map(segments => {
+    const inner = segments.map(seg =>
+      seg.href
+        ? `<a href="${seg.href}">${seg.text}</a>`
+        : seg.text
+    ).join("");
+    return `<p class="blurb">${inner}</p>`;
+  }).join("\n");
+
+  page.insertAdjacentHTML("beforeend", `
+    <section class="hero">
+      <div class="wrap">
+        <h1 class="headline">${SITE.headline}</h1>
+        ${blurbHTML}
+      </div>
+    </section>
+  `);
+
+  /* ---- People ---- */
+  const colsHTML = SITE.people.map(col => {
+    const membersHTML = col.members.map(p => {
+      const detail = p.email
+        ? `<a class="email" href="mailto:${p.email}">${p.email}</a>`
+        : `<span class="aff">${p.aff}</span>`;
+      return `
+        <div class="person">
+          <span class="name">${p.name}</span>
+          ${detail}
+        </div>`;
+    }).join("\n");
+
+    return `
+      <div class="col">
+        <div class="label">${col.label}</div>
+        ${membersHTML}
+      </div>`;
+  }).join("\n");
+
+  page.insertAdjacentHTML("beforeend", `
+    <section class="people">
+      <div class="wrap">
+        <div class="people-grid">
+          ${colsHTML}
+        </div>
+        <footer>${SITE.nameEN} · ${SITE.nameFR}</footer>
+      </div>
+    </section>
+  `);
+
+})();
+</script>
+
+</div>
+</body>
+</html>
