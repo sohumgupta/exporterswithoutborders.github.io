@@ -4,14 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Exporters Without Borders / Exportateurs Sans Frontières</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
 <link rel="icon" type="image/svg+xml" href="favicon_io/esf-favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --sand:     #F7F1E3;
@@ -19,6 +16,22 @@
     --ink:      #2B2B2B;
     --ink-soft: #5A5247;
     --oxblood:  #981b1e;
+  }
+
+  @font-face {
+    font-family: 'EB Garamond';
+    src: url('fonts/EB_Garamond/EBGaramond-VariableFont_wght.ttf') format('truetype');
+    font-weight: 400 800;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('fonts/Cormorant_Garamond/CormorantGaramond-VariableFont_wght.ttf') format('truetype');
+    font-weight: 400 800;
+    font-style: normal;
+    font-display: swap;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -40,7 +53,6 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     height: 100dvh;        /* fill the visible viewport exactly */
-    /* overflow: hidden; */
 
   }
 
@@ -137,7 +149,7 @@
     line-height: 1.55;
     color: var(--ink);
     max-width: 600px;
-    margin-top: clamp(0.875rem, 2vh, 1.5rem);
+    margin-top: clamp(2rem, 3.5vh, 3rem);
   }
   p.blurb a {
     border-bottom: 1px solid #98000060;
@@ -206,6 +218,15 @@
     letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--ink-soft);
+
+    .disclosure {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: clamp(0.5625rem, 0.9vw, 0.625rem);
+      letter-spacing: 0.16em;
+      white-space: pre-line;
+      color: var(--oxblood);
+    }
   }
 
   /* ——— Narrow screens: collapse to single column, allow scrolling ——— */
@@ -229,7 +250,6 @@ const SITE = {
   /* ---- Header ---- */
   nameEN: "Exporters Without Borders",
   nameFR: "Exportateurs Sans Frontières",
-  status: "Pre-launch · 2026",
 
   /* ---- Hero ---- */
   headline: "Four people built Colombia's $2B flower industry. We're looking for the next group of industrial pioneers.",
@@ -270,7 +290,10 @@ const SITE = {
         { name: "Kartik Akileswaran", aff: "Growth Teams" }
       ]
     }
-  ]
+  ],
+
+  /* ---- Disclosure ---- */
+  disclosure: "ESF is a new nonprofit initiative; our US 501(c)(3) arrangements are being finalized.\nAdvisor affiliations are for identification only."
 
 };
 </script>
@@ -293,7 +316,6 @@ const SITE = {
           <span class="en">${SITE.nameEN}</span>
           <span class="fr">${SITE.nameFR}</span>
         </div>
-        <div class="tag">${SITE.status}</div>
       </div>
     </header>
   `);
@@ -343,7 +365,10 @@ const SITE = {
         <div class="people-grid">
           ${colsHTML}
         </div>
-        <footer>${SITE.nameEN} · ${SITE.nameFR}</footer>
+        <footer>
+          <p class="disclosure">${SITE.disclosure}</p>
+          ${SITE.nameEN} · ${SITE.nameFR}
+        </footer>
       </div>
     </section>
   `);
